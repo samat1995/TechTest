@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using Newtonsoft.Json;
 
 namespace AutomationTests.Services
@@ -32,7 +28,7 @@ namespace AutomationTests.Services
 
         public Task<HttpResponseMessage> PostAsync<T>(string uri, T body)
         {
-            string serialisedBody = JsonConvert.SerializeObject(body);
+            var serialisedBody = JsonConvert.SerializeObject(body);
             return _client.PostAsync(uri, new StringContent(serialisedBody));
         }
 

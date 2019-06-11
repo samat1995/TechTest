@@ -1,4 +1,5 @@
 ﻿using AutomationTests.Types;
+using AutomationTests.Types.Helpers;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -30,7 +31,7 @@ namespace AutomationTests.Services
             return _apiService.GetAsync<Post>($"posts/{postId}");
         }
 
-        public async Task<Post> CreatePost<T>(T post)
+        public async Task<Post> CreatePost (PostCreation post)
         {
             var response = await _apiService.PostAsync("posts", post);
             return JsonConvert.DeserializeObject<Post>(await response.Content.ReadAsStringAsync());

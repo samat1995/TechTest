@@ -63,12 +63,17 @@
     <Compile Include="Services\JsonApiService.cs" />
     <Compile Include="Services\JsonPlaceholderService.cs" />
     <Compile Include="Types\Comment.cs" />
+    <Compile Include="Types\Helpers\PostCreation.cs" />
     <Compile Include="Types\Post.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="UnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="TestResults.trx" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="README.txt" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

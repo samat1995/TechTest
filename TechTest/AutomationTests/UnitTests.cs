@@ -5,17 +5,30 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using FluentAssertions;
 using System.Net;
+using AutomationTests.Types.Helpers;
 
 namespace AutomationTests
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTests
     {
         private JsonPlaceholderService _jsonPlaceholderService;
 
-        public UnitTest1()
+        public UnitTests()
         {
             _jsonPlaceholderService = new JsonPlaceholderService();
+        }
+
+
+        [TestMethod]
+        public async Task GetAllPostsTest()
+        {
+            // act
+            var allPosts = await _jsonPlaceholderService.GetAllPostsAsync();
+
+            // assert
+            allPosts.Should().NotBeNull();
+            allPosts.Count().Should().BeGreaterThan(0);
         }
 
 
@@ -23,7 +36,7 @@ namespace AutomationTests
         public async Task CreatePostTest()
         {
             // arrange
-            var newPost = new
+            var newPost = new PostCreation
             {
                 Title = Guid.NewGuid().ToString("N"),
                 Body = Guid.NewGuid().ToString("N"),
@@ -37,6 +50,11 @@ namespace AutomationTests
             // assert
             createdPost.Should().NotBeNull();
             var retrievedPost = await _jsonPlaceholderService.GetPostAsync(createdPost.Id);
+
+            createdPost.Title.Should().Be(newPost.Title);
+            createdPost.Body.Should().Be(newPost.Body);
+            createdPost.UserId.Should().Be(newPost.UserId);
+
             retrievedPost.Title.Should().Be(newPost.Title);
             retrievedPost.Body.Should().Be(newPost.Body);
             retrievedPost.UserId.Should().Be(newPost.UserId);
